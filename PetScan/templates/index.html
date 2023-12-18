@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: url('path/to/dog-background.jpg') center center fixed;
+            background-size: cover;
+        }
+
+        h1 {
+            color:black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        {% if prediction %}
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color:black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 0;
+            font-weight: bold;
+            color:pink;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        {% endif %}
+    </style>
+    <title>Image Classification Web App</title>
+</head>
+<body>
+    <h1>Image Classification Web App</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div>
+            <label for="image">Choose an image:</label>
+            {{ form.image }}
+        </div>
+        <div>
+            <input type="submit" value="Classify Image">
+        </div>
+    </form>
+    {% if prediction %}
+    <div id="result">
+        <h2>Prediction:</h2>
+        <p>{{ prediction }}</p>
+        <img src="{{ image_path }}" alt="Uploaded Image">
+    </div>
+    {% endif %}
+</body>
+</html>
